@@ -16,7 +16,7 @@ class Player:
 priest = Player("Nicodemos", 35 )'''
 
 
-
+#Lendo história
 handler = open('storyER.txt', 'r')
 print(handler.read())
 
@@ -27,15 +27,14 @@ def beginningGame():
     print("Espace")
     import asciiStrg as pics
 
+#Todos os eventos do jogo
+def eventListeners():
+    #EVENTS
 
 
-
-
-
-
-
-
-
+#Os itens/objetos do jogo
+def allItems():
+    #itens
 
 
 
