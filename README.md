@@ -22,3 +22,22 @@ Game explanation:
 6-A mensuração do espaço(casa) foi feita no 'Planer5D', o link:'https://planner5d.com/view?key=382f13421c4f0872515d31309a791c66'.
 
 7-O roadmap foi feito no site 'Sigma', o link:'https://www.figma.com/file/qnO8HDERqhlDsqUMwaarTG/FUP?fuid=998054901505584254'.
+
+
+
+
+
+
+
+
+
+
+!-
+
+line of thinking
+-> USER
+-> DIRECTIONS
+-> CHALLENGES
+-> DECISION MAKING
+
+-!

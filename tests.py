@@ -4,7 +4,7 @@
 
 #The main object
 
-sanityLife = 50
+'''sanityLife = 50
 class Player:
 
 
@@ -13,4 +13,51 @@ class Player:
         self.age = age
 
 
-priest = Player("Nicodemos", 35 )
+priest = Player("Nicodemos", 35 )'''
+
+
+
+handler = open('storyER.txt', 'r')
+print(handler.read())
+
+#Começando o game em si
+def beginningGame():
+    print("Start")
+    print("Wake up")
+    print("Espace")
+    import asciiStrg as pics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Laço para começar ou não o jogo
+while True:
+    try:
+        WantToStt = str(input("Want to start?('Yes' for start/ 'No' for exit)"))
+        WantToStt = WantToStt.capitalize()
+        if WantToStt == "Yes" or WantToStt == "Sim" or WantToStt == "Y" or WantToStt == "S" :
+            beginningGame()
+            break
+        elif WantToStt == "No" or WantToStt == "Nao" or WantToStt == "N":
+            print("GOODBYE")
+            break
+        else:
+            print("Understand, type again")
+    except:
+        print("Undefined")
+        break
