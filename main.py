@@ -14,13 +14,15 @@ print()
 #Variáveis bases para o andar do game
 bolsa = []
 
+#Dicionário com itens do jogo
 game_dict = {
-    'carta':"Hão de ser benditos, os tempos que não me lembro mais \n E os passos perdidos registr$%$%$%$%$%$%$$%$%$4",
+    'carta':"Hão de ser benditos~/\~//\~/~",
     'lanterna': "Lanterna 07-567",
     'algodao': "Algodão",
     'curativo': "Curativo",
 }
 
+#Constantes do jogo
 san_constantes = (
     0, 3, 5, 7, 11, 17, 33
 )
@@ -29,13 +31,19 @@ desc_constantes = (
     0, 4, 6, 8, 20
 )
 
-def user_stats(dimSanidade, descobrimento):
-    print("ESTASTÍSTICAS")
-    san = 100 - dimSanidade
-    desc = 0 + descobrimento
-
-    print(f"----Sua sanidade é de {san}----Sua porcentagem de descobrimento do local é de {desc}----")
-
+sanidade = 100
+exploracao = 0
+def verStatus():
+    while True:
+        pergunta = input("Quer ver seus status? ").capitalize()
+        if pergunta == "Sim":
+            print(sanidade, exploracao)
+            break
+        if pergunta == "Não" or pergunta == "Nao":
+            print("...")
+            break
+        else:
+            print("Não entendi...")
 
 
 #Funções de ações e eventos do jogo
@@ -75,7 +83,8 @@ def lugar_A():
                     print(game_dict['carta'])
                     viz_bolsa()
                     print()
-                    user_stats(san_constantes[2], desc_constantes[1])
+                    x = sanidade - 5
+                    print(x)
 
             if esc_direcao == "2":
                 lanterna = game_dict['lanterna']
