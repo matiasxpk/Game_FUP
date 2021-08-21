@@ -1,14 +1,17 @@
-sanidade = 100
-exploracao = 0
-
-def verStatus():
+def verStatus(dimSanidade, aumExp):
+    sanidadeAtual = dimSanidade
+    expAtual = aumExp
     while True:
-        ver_status = input("Quer ver seus status? ").capitalize()
-        if ver_status == "Sim":
-            print(sanidade, exploracao)
+        pergunta = input("Quer ver seus status? ").capitalize()
+        if pergunta == "Sim":
+            print(f".: -=-Sua sanidade atual é de: {sanidadeAtual}\n"
+                  f"Sua porcetagem de exploração é de: {expAtual}-=- :.")
             break
-        if ver_status == "Não" or ver_status == "Nao":
+        if pergunta == "Não" or pergunta == "Nao":
             print("...")
             break
         else:
             print("Não entendi...")
+    if sanidadeAtual <= 0:
+        print("GOODBYE")
+        return
