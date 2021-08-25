@@ -8,6 +8,7 @@ from pyasciiStrg import asciiObj3
 from pyasciiStrg import asciiObj4
 from pyasciiStrg import asciiObj5
 from pyasciiStrg import asciiObj6
+from pyasciiStrg import asciiObj7
 
 # Lendo arquivo com a história
 handler = open(
@@ -27,6 +28,7 @@ game_dict = {
     'lanterna': "Lanterna 07-567",
     'algodao': "Algodão",
     'curativo': "Curativo",
+    'giz': "Giz",
 }
 
 #Constantes do jogo
@@ -45,8 +47,8 @@ def verStatus(dimSanidade, aumExp):
     while True:
         pergunta = input("Quer ver seus status? ").capitalize()
         if pergunta == "Sim":
-            print(f".: -=-Sua sanidade atual é de: {sanidadeAtual}\n"
-                  f"Sua porcetagem de exploração é de: {expAtual}-=- :.")
+            print(f".: -=- Sua sanidade atual é de: {sanidadeAtual}\n"
+                  f"Sua porcetagem de exploração é de: {expAtual}% -=- :.")
             break
         if pergunta == "Não" or pergunta == "Nao":
             print("...")
@@ -73,29 +75,35 @@ def viz_bolsa():
             print("Não entendi...")
 
 #Localizações
-def lugar_B():
+
+def lugar_lounge():
+    print('lounge')
+
+def lugar_corredor():
     print("CORREDOR")
     asciiObj3()
     print("Finalmente você saiu daquela sala escura,agora está na hora de buscar o caminho para o 'jardim'...")
-
+    mngames_conc = 0
     while True:
         try:
-            mngames_conc = 0
             esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(1), Norte (2), Leste(3), Oeste(4)")
             if esc_direcao == "1":
-                print("Vai retornar aquela sala ?! faça o que quiser...")
-                lugar_A()
+                print("Vai retornar para aquela sala ?! faça o que quiser...")
+                lugar_salaInicio()
 
             if esc_direcao == "2":
-                esc_opc2 = input("Escolha uma dessas direções: Lounge(X), Minigame Quadro(Y)").upper()
+                esc_opc2 = input("Escolha uma dessas direções: Lounge(X), Minigame-Quadro(Y), Corredor(C)").upper()
                 if esc_opc2 == "X":
                     if mngames_conc == 3:
-                        print("Lounge")
+                        lugar_lounge()
                     else:
                         print("Conclua os eventos da área antes de avamçar!")
                 if esc_opc2 == "Y":
                     print("Um quadro...")
                     #MINIGAME
+                    '''
+                    Soon...
+                    '''
                     x = input("MINIGAME: ")
                     if x == "MINIGAME":
                         mngames_conc += 1
@@ -107,37 +115,74 @@ def lugar_B():
                             verStatus(san_constantes[1], desc_constantes[3])
                         else:
                             verStatus(san_constantes[0], desc_constantes[2])
+                if esc_opc2 == "C":
+                    print("Retornando ao corredor...")
 
             if esc_direcao == "3":
                 print("Que sala imensa, quantos momentos, quantas lembranças...")
                 asciiObj6()
-
+                while True:
+                    esc_Sprincipal = input("Escolha uma dessas direções: Norte(N), Sul(S), Leste(L), Oeste(O)").upper()
+                    if esc_Sprincipal == "N":
+                        if game_dict['giz'] in bolsa:
+                            print("Por aqui já está tudo feito.")
+                        else:
+                            print("Um quadro branco...")
+                            print("Parece uma frase inacabada, tente descobrir o resto, talvez nos deixe mais perto do 'jardim'")
+                            print("Do you remember when you said to me: ")
+                            print("...")
+                            enigma_mg = input("").capitalize()
+                            if enigma_mg == "My friend,hope is a prison.":
+                                mngames_conc += 1
+                                print("É isto!Você consiguiu desvendar o enigma...e comprovar o quão triste estava sua amada")
+                                print("Pegue seu giz de lembrança")
+                                giz = game_dict['giz']
+                                bolsa.append(giz)
+                                print()
+                                viz_bolsa()
+                            if enigma_mg != "My friend,hope is a prison.":
+                                print("Não é isso!Busque sinais pela a sala")
+                    if esc_Sprincipal == "S":
+                        print("Retornando ao corredor...")
+                        break
+                    if esc_Sprincipal == "L":
+                        print("Uma televisão ligada!")
+                        print("Há algo escrito em inglês na tela")
+                        asciiObj7()
+                        print("...")
+                    if esc_Sprincipal == "O":
+                        print("Uma poltrona com um livro sobre arquitetos")
+                    else:
+                        print()
 
             if esc_direcao == "4":
                 print("O quarto de sua antiga amada. A cozinha está ao lado.")
-                esc_opc4 = input("Escolha uma dessas direções: Cozinha(X), Quarto(Y)").upper()
+                esc_opc4 = input("Escolha uma dessas direções: Cozinha(X), Quarto(Y),  Corredor(C)").upper()
                 if esc_opc4 == "X":
                     print("COZINHA")
                     asciiObj4()
+
                 if esc_opc4 == "Y":
                     print("QUARTO DE DOLORES")
                     asciiObj5()
+                if esc_opc4 == "C":
+                    print("Retornando ao corredor...")
             else:
                 print()
         except:
             print("Undefined")
 
 
-def lugar_A():
+def lugar_salaInicio():
     print("SALA DE ENTRADA")
     asciiObj2()
     print("A sala está escura, procure algo para realmente enxergar uma saída")
 
     while True:
         try:
-            esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(1), Norte (2), Leste(3), Oeste(4)")
+            esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(S), Norte (N), Leste(L), Oeste(O)")
 
-            if esc_direcao == "1":
+            if esc_direcao == "S":
                 carta = game_dict['carta']
                 if carta in bolsa:
                     print("Você já veio aqui, não há mais nada")
@@ -157,7 +202,7 @@ def lugar_A():
                         else:
                             verStatus(san_constantes[0], desc_constantes[2])
 
-            if esc_direcao == "2":
+            if esc_direcao == "N":
                 lanterna = game_dict['lanterna']
                 if lanterna in bolsa:
                     print()
@@ -184,14 +229,14 @@ def lugar_A():
                     print("Epa!Vai aonde sangrando desse jeito!")
                     print("Procure algo para estancar a sangria")
                 if expl_ou_ava == "A" and game_dict['algodao'] not in bolsa or game_dict['curativo'] in bolsa:
-                    lugar_B()
+                    lugar_corredor()
                     break
                 elif expl_ou_ava == "E":
                     print("Continue explorando")
                 elif expl_ou_ava != "A" and expl_ou_ava != "E":
                     print("Não entendi...")
 
-            if esc_direcao == "3":
+            if esc_direcao == "L":
                 algodao = game_dict['algodao']
                 if algodao in bolsa:
                     print("Você quer se F*D*R de novo???")
@@ -213,7 +258,7 @@ def lugar_A():
                     bolsa.append(algodao)
                     print("Vamos, procure por um curativo ou algo do tipo agora")
 
-            if esc_direcao == "4":
+            if esc_direcao == "O":
                 algodao = game_dict['algodao']
                 if algodao in bolsa:
                     print()
@@ -241,7 +286,7 @@ def game_inicio():
     print("Acorde Padre!")
     print("...")
     asciiObj1()
-    lugar_A()
+    lugar_salaInicio()
 
 #Laço para começar ou não o jogo
 while True:
