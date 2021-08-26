@@ -24,13 +24,13 @@ bolsa = []
 
 #Dicionário com itens do jogo
 game_dict = {
-    'carta':"Carta: Hão de ser benditos´çsç[sççs-0o4dl´´d",
+    'carta':"Carta: Hão d ser benditps´çsç sççs 0o4dl´´d",
     'lanterna': "Lanterna 07-567",
     'algodao': "Algodão",
     'curativo': "Curativo",
     'giz': "Giz",
     'chave': "Chave",
-    'fotografia' : asciiObj7(),
+    'fotografia': "Fotografia",
 }
 
 #Constantes do jogo
@@ -213,6 +213,10 @@ def lugar_corredor():
                 if esc_opc4 == "Y":
                     print("QUARTO DE DOLORES")
                     asciiObj5()
+                    print(".:...:...")
+                    hangman = input("HANGMAN: ")
+                    if hangman == "HANGMAN":
+                        mngames_conc += 1
 
                 if esc_opc4 == "C":
                     print("Retornando ao corredor...")
