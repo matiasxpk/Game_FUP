@@ -29,6 +29,8 @@ game_dict = {
     'algodao': "Algodão",
     'curativo': "Curativo",
     'giz': "Giz",
+    'chave': "Chave",
+    'fotografia' : asciiObj7(),
 }
 
 #Constantes do jogo
@@ -86,12 +88,12 @@ def lugar_corredor():
     mngames_conc = 0
     while True:
         try:
-            esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(1), Norte (2), Leste(3), Oeste(4)")
-            if esc_direcao == "1":
+            esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(S), Norte (N), Leste(L), Oeste(O)")
+            if esc_direcao == "S":
                 print("Vai retornar para aquela sala ?! faça o que quiser...")
                 lugar_salaInicio()
 
-            if esc_direcao == "2":
+            if esc_direcao == "N":
                 esc_opc2 = input("Escolha uma dessas direções: Lounge(X), Minigame-Quadro(Y), Corredor(C)").upper()
                 if esc_opc2 == "X":
                     if mngames_conc == 3:
@@ -118,7 +120,7 @@ def lugar_corredor():
                 if esc_opc2 == "C":
                     print("Retornando ao corredor...")
 
-            if esc_direcao == "3":
+            if esc_direcao == "L":
                 print("Que sala imensa, quantos momentos, quantas lembranças...")
                 asciiObj6()
                 while True:
@@ -155,16 +157,63 @@ def lugar_corredor():
                     else:
                         print()
 
-            if esc_direcao == "4":
+            if esc_direcao == "O":
                 print("O quarto de sua antiga amada. A cozinha está ao lado.")
                 esc_opc4 = input("Escolha uma dessas direções: Cozinha(X), Quarto(Y),  Corredor(C)").upper()
                 if esc_opc4 == "X":
                     print("COZINHA")
                     asciiObj4()
+                    while True:
+                        esc_Sprincipal = input(
+                            "Escolha uma dessas direções: Norte(N), Sul(S), Leste(L), Oeste(O)").upper()
+                        if esc_Sprincipal == "N":
+                            print("A despensa da casa a esquerda e o fogção a direita")
+                            esc_ramificacao = input("Escolha uma dessas direções: Fogão(F), Despensa(D)").upper()
+                            if esc_ramificacao == "F":
+                                print("Fogão")
+                                print("Nada de valor por aqui")
+                            if esc_ramificacao == "D":
+                                print("Despensa")
+                                esc_ramificacao = input("Escolha uma dessas direções: Patreleira(P), Cozinha(C)")
+                                if esc_ramificacao == "P":
+                                    if game_dict['chave'] in bolsa:
+                                        print("Tudo vazio na patreleira")
+                                    else:
+                                        print("Uma pratelheira bem antiga")
+                                        print("Uma chave!Pode ter alguma serventia...")
+                                        chave = game_dict['chave']
+                                        bolsa.append(chave)
+                                        viz_bolsa()
+                                if esc_ramificacao == "C":
+                                    print("Retornando a cozinha")
+                            else:
+                                print("Não entendi...")
+                        if esc_Sprincipal == "S":
+                            print("Um jogo de vasilhas, não perca seu tempo por aqui!")
+                        if esc_Sprincipal == "L":
+                            esc_ramificacao = input("Escolha uma dessas direções: Armário(A), Geladeira(G), Corredor(C)").upper()
+                            if esc_ramificacao == "A":
+                                print("Esse armário foi presente seu!!!\n Há uma fotografia antiga nele")
+                                fotografia = game_dict['fotografia']
+                                bolsa.append(fotografia)
+                                viz_bolsa()
+                            if esc_ramificacao == "G":
+                                print("Uma geladeira. Melhor! Mm estoque agridoce de remédios,pílulas e água\n Não perca seu tempo filho...")
+
+                            if esc_ramificacao == "C":
+                                print("Retornando ao corredor...")
+                                break
+                            else:
+                                print("Não entendi")
+                        if esc_Sprincipal == "O":
+                            print()
+                        else:
+                            print()
 
                 if esc_opc4 == "Y":
                     print("QUARTO DE DOLORES")
                     asciiObj5()
+
                 if esc_opc4 == "C":
                     print("Retornando ao corredor...")
             else:
