@@ -9,6 +9,11 @@ from pyasciiStrg import asciiObj4
 from pyasciiStrg import asciiObj5
 from pyasciiStrg import asciiObj6
 from pyasciiStrg import asciiObj7
+from pyasciiStrg import asciiObj8
+from pyasciiStrg import asciiObj9
+from pyasciiStrg import asciiObj10
+from pyasciiStrg import asciiObj11
+from pyasciiStrg import asciiObj12
 
 # Lendo arquivo com a história
 handler = open(
@@ -58,8 +63,8 @@ def verStatus(dimSanidade, aumExp):
         else:
             print("Não entendi...")
     if sanidadeAtual <= 0:
-        print("GOODBYE")
-        return
+        print("GAMEOVER")
+        init()
 
 #Funções de ações e eventos do jogo
 #SÓ SERÃO CHAMADAS SE O LAÇO NO FIM DO CÓDIGO TIVER UMA CONFIRMAÇÃO PERANTE A PERGUNTA
@@ -76,10 +81,38 @@ def viz_bolsa():
         else:
             print("Não entendi...")
 
-#Localizações
+#LOCALIZAÇÕES
+def saladeReza():
+    print("Sala de reza")
+    return
 
 def lugar_lounge():
-    print('lounge')
+    print('LOUNGE')
+    asciiObj8()
+    print("||The     ||      garth      ||     is       ||     close--")
+    mngames_conc = 3
+    while True:
+            esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(S), Norte (N), Leste(L), Oeste(O)")
+            if esc_direcao == "S":
+                asciiObj12()
+            if esc_direcao == "N":
+                saladeReza()
+            if esc_direcao == "L":
+                lugar_corredor()
+            if esc_direcao == "O":
+                print("BANHEIRO")
+                asciiObj9()
+                esc_ramificacao = input("Escolha uma dessas direções: Espelho quebrado(E), Vaso sanitário(V), Lounge(L), Banheira(B)").upper()
+                if esc_ramificacao == "E":
+                    asciiObj10()
+                if esc_ramificacao == "V":
+                    asciiObj11()
+                if esc_ramificacao == "L":
+                    print("Voltando ao lounge...")
+                if esc_ramificacao == "B":
+                    print("Água quente na banheira!!!Cuidado")
+                else:
+                    print()
 
 def lugar_corredor():
     print("CORREDOR")
@@ -94,13 +127,13 @@ def lugar_corredor():
                 lugar_salaInicio()
 
             if esc_direcao == "N":
-                esc_opc2 = input("Escolha uma dessas direções: Lounge(X), Minigame-Quadro(Y), Corredor(C)").upper()
-                if esc_opc2 == "X":
+                esc_opc = input("Escolha uma dessas direções: Lounge(X), Minigame-Quadro(Y), Corredor(C)").upper()
+                if esc_opc == "X":
                     if mngames_conc == 3:
                         lugar_lounge()
                     else:
                         print("Conclua os eventos da área antes de avamçar!")
-                if esc_opc2 == "Y":
+                if esc_opc == "Y":
                     print("Um quadro...")
                     #MINIGAME
                     '''
@@ -117,7 +150,7 @@ def lugar_corredor():
                             verStatus(san_constantes[1], desc_constantes[3])
                         else:
                             verStatus(san_constantes[0], desc_constantes[2])
-                if esc_opc2 == "C":
+                if esc_opc == "C":
                     print("Retornando ao corredor...")
 
             if esc_direcao == "L":
@@ -159,8 +192,8 @@ def lugar_corredor():
 
             if esc_direcao == "O":
                 print("O quarto de sua antiga amada. A cozinha está ao lado.")
-                esc_opc4 = input("Escolha uma dessas direções: Cozinha(X), Quarto(Y),  Corredor(C)").upper()
-                if esc_opc4 == "X":
+                esc_opc = input("Escolha uma dessas direções: Cozinha(X), Quarto(Y),  Corredor(C)").upper()
+                if esc_opc == "X":
                     print("COZINHA")
                     asciiObj4()
                     while True:
@@ -210,7 +243,7 @@ def lugar_corredor():
                         else:
                             print()
 
-                if esc_opc4 == "Y":
+                if esc_opc == "Y":
                     print("QUARTO DE DOLORES")
                     asciiObj5()
                     print(".:...:...")
@@ -218,7 +251,7 @@ def lugar_corredor():
                     if hangman == "HANGMAN":
                         mngames_conc += 1
 
-                if esc_opc4 == "C":
+                if esc_opc == "C":
                     print("Retornando ao corredor...")
             else:
                 print()
@@ -230,100 +263,97 @@ def lugar_salaInicio():
     print("SALA DE ENTRADA")
     asciiObj2()
     print("A sala está escura, procure algo para realmente enxergar uma saída")
-
     while True:
-        try:
-            esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(S), Norte (N), Leste(L), Oeste(O)")
-
-            if esc_direcao == "S":
-                carta = game_dict['carta']
-                if carta in bolsa:
-                    print("Você já veio aqui, não há mais nada")
-                else:
-                    bolsa.append(carta)
-                    print("Uma carta com água por cima...")
-                    print(game_dict['carta'])
-                    viz_bolsa()
-                    print()
-                    if game_dict['carta'] and (game_dict['algodao'] not in bolsa and game_dict['lanterna'] not in bolsa):
-                        verStatus(san_constantes[0], desc_constantes[1])
-                    if game_dict['lanterna'] in bolsa and game_dict['algodao'] in bolsa:
-                        verStatus(san_constantes[1], desc_constantes[3])
-                    elif (game_dict['lanterna'] in bolsa and not game_dict['algodao'] in bolsa) or (game_dict['algodao'] in bolsa and not game_dict['lanterna']in bolsa):
-                        if game_dict['algodao'] in bolsa:
-                            verStatus(san_constantes[1], desc_constantes[2])
-                        else:
-                            verStatus(san_constantes[0], desc_constantes[2])
-
-            if esc_direcao == "N":
-                lanterna = game_dict['lanterna']
-                if lanterna in bolsa:
-                    print()
-                else:
-                    print("Uma lanterna!!!!!")
-                    bolsa.append(lanterna)
-                    print("Você agora está visualizando a porta")
-                    print()
-                    viz_bolsa()
-                    print()
-                    if game_dict['lanterna'] and (game_dict['algodao'] not in bolsa and game_dict['carta'] not in bolsa):
-                        verStatus(san_constantes[0], desc_constantes[1])
-                    if game_dict['carta'] in bolsa and game_dict['algodao'] in bolsa:
-                        verStatus(san_constantes[1], desc_constantes[3])
-                    elif (game_dict['carta'] in bolsa and not game_dict['algodao'] in bolsa) or (game_dict['algodao'] in bolsa and not game_dict['carta']in bolsa):
-                        if game_dict['algodao'] in bolsa:
-                            verStatus(san_constantes[1], desc_constantes[2])
-                        else:
-                            verStatus(san_constantes[0], desc_constantes[2])
-
-                expl_ou_ava = input("Quer avançar além da porta ou quer continuar explorando a sala?\n (Digite A para avançar)-(Digite E para continuar explorando)").upper()
-                print()
-                if expl_ou_ava == "A" and game_dict['algodao'] in bolsa and game_dict['curativo'] not in bolsa:
-                    print("Epa!Vai aonde sangrando desse jeito!")
-                    print("Procure algo para estancar a sangria")
-                if expl_ou_ava == "A" and game_dict['algodao'] not in bolsa or game_dict['curativo'] in bolsa:
-                    lugar_corredor()
-                    break
-                elif expl_ou_ava == "E":
-                    print("Continue explorando")
-                elif expl_ou_ava != "A" and expl_ou_ava != "E":
-                    print("Não entendi...")
-
-            if esc_direcao == "L":
-                algodao = game_dict['algodao']
-                if algodao in bolsa:
-                    print("Você quer se F*D*R de novo???")
-                else:
-                    print("CUIDADO PRA NÃO SE CORTAR!!!!!!...")
-                    print("O chão estava cheio de cacos de vidro, você deveria ter prestado mais atenção!")
-                    print("Voce não vai conseguir prosseguir se não estancar essa m&rd@!")
-                    print()
-                    if game_dict['algodao'] and (game_dict['carta'] not in bolsa and game_dict['lanterna'] not in bolsa):
-                        verStatus(san_constantes[1], desc_constantes[1])
-                    if game_dict['lanterna'] in bolsa and game_dict['carta'] in bolsa:
-                        verStatus(san_constantes[1], desc_constantes[3])
-                    elif (game_dict['lanterna'] in bolsa and not game_dict['carta'] in bolsa) or (game_dict['carta'] in bolsa and not game_dict['lanterna']in bolsa):
-                        if game_dict['carta'] in bolsa:
-                            verStatus(san_constantes[1], desc_constantes[2])
-                        else:
-                            verStatus(san_constantes[0], desc_constantes[2])
-                    print("Ufa, um algodão, mas não será suficiente")
-                    bolsa.append(algodao)
-                    print("Vamos, procure por um curativo ou algo do tipo agora")
-
-            if esc_direcao == "O":
-                algodao = game_dict['algodao']
-                if algodao in bolsa:
-                    print()
-                    curativo = game_dict['curativo']
-                    print("Ufa!Um curativo")
-                    bolsa.append(curativo)
-                else:
-                    print("Uma bolsa com medicamentos, nada mais interessante no local...")
+        esc_direcao = input("Você quatro direções dentro do espaço para ir: Sul(S), Norte (N), Leste(L), Oeste(O)")
+        if esc_direcao == "S":
+            carta = game_dict['carta']
+            if carta in bolsa:
+                print("Você já veio aqui, não há mais nada")
             else:
-                print("Digite um dos valores citados")
-        except:
-            print("Undefined")
+                bolsa.append(carta)
+                print("Uma carta com água por cima...")
+                print(game_dict['carta'])
+                viz_bolsa()
+                print()
+                if game_dict['carta'] and (game_dict['algodao'] not in bolsa and game_dict['lanterna'] not in bolsa):
+                    verStatus(san_constantes[0], desc_constantes[1])
+                if game_dict['lanterna'] in bolsa and game_dict['algodao'] in bolsa:
+                    verStatus(san_constantes[1], desc_constantes[3])
+                elif (game_dict['lanterna'] in bolsa and not game_dict['algodao'] in bolsa) or (game_dict['algodao'] in bolsa and not game_dict['lanterna']in bolsa):
+                    if game_dict['algodao'] in bolsa:
+                        verStatus(san_constantes[1], desc_constantes[2])
+                    else:
+                        verStatus(san_constantes[0], desc_constantes[2])
+
+        if esc_direcao == "N":
+            lanterna = game_dict['lanterna']
+            if lanterna in bolsa:
+                print()
+            else:
+                print("Uma lanterna!!!!!")
+                bolsa.append(lanterna)
+                print("Você agora está visualizando a porta")
+                print()
+                viz_bolsa()
+                print()
+                if game_dict['lanterna'] and (game_dict['algodao'] not in bolsa and game_dict['carta'] not in bolsa):
+                    verStatus(san_constantes[0], desc_constantes[1])
+                if game_dict['carta'] in bolsa and game_dict['algodao'] in bolsa:
+                    verStatus(san_constantes[1], desc_constantes[3])
+                elif (game_dict['carta'] in bolsa and not game_dict['algodao'] in bolsa) or (game_dict['algodao'] in bolsa and not game_dict['carta']in bolsa):
+                    if game_dict['algodao'] in bolsa:
+                        verStatus(san_constantes[1], desc_constantes[2])
+                    else:
+                        verStatus(san_constantes[0], desc_constantes[2])
+
+            expl_ou_ava = input("Quer avançar além da porta ou quer continuar explorando a sala?\n (Digite A para avançar)-(Digite E para continuar explorando)").upper()
+            print()
+            if expl_ou_ava == "A" and game_dict['algodao'] in bolsa and game_dict['curativo'] not in bolsa:
+                print("Epa!Vai aonde sangrando desse jeito!")
+                print("Procure algo para estancar a sangria")
+            if expl_ou_ava == "A" and game_dict['algodao'] not in bolsa or game_dict['curativo'] in bolsa:
+                lugar_corredor()
+                break
+            elif expl_ou_ava == "E":
+                print("Continue explorando")
+            elif expl_ou_ava != "A" and expl_ou_ava != "E":
+                print("Não entendi...")
+
+        if esc_direcao == "L":
+            algodao = game_dict['algodao']
+            if algodao in bolsa:
+                print("Você quer se F*D*R de novo???")
+            else:
+                print("CUIDADO PRA NÃO SE CORTAR!!!!!!...")
+                print("O chão estava cheio de cacos de vidro, você deveria ter prestado mais atenção!")
+                print("Voce não vai conseguir prosseguir se não estancar essa m&rd@!")
+                print()
+                if game_dict['algodao'] and (game_dict['carta'] not in bolsa and game_dict['lanterna'] not in bolsa):
+                    verStatus(san_constantes[1], desc_constantes[1])
+                if game_dict['lanterna'] in bolsa and game_dict['carta'] in bolsa:
+                    verStatus(san_constantes[1], desc_constantes[3])
+                elif (game_dict['lanterna'] in bolsa and not game_dict['carta'] in bolsa) or (game_dict['carta'] in bolsa and not game_dict['lanterna']in bolsa):
+                    if game_dict['carta'] in bolsa:
+                        verStatus(san_constantes[1], desc_constantes[2])
+                    else:
+                        verStatus(san_constantes[0], desc_constantes[2])
+                print("Ufa, um algodão, mas não será suficiente")
+                bolsa.append(algodao)
+                print("Vamos, procure por um curativo ou algo do tipo agora")
+
+        if esc_direcao == "O":
+            algodao = game_dict['algodao']
+            if algodao in bolsa:
+                print()
+                curativo = game_dict['curativo']
+                print("Ufa!Um curativo")
+                bolsa.append(curativo)
+            else:
+                print("Uma bolsa com medicamentos, nada mais interessante no local...")
+
+        if esc_direcao != "N" and esc_direcao != "S" and esc_direcao != "L" and esc_direcao != "O":
+            print("Digite um dos valores citados")
+
 
 #Função para iniciar o jogo,depois da resposta abaixo
 def game_inicio():
@@ -341,20 +371,22 @@ def game_inicio():
     asciiObj1()
     lugar_salaInicio()
 
-#Laço para começar ou não o jogo
-while True:
-    try:
-        conf_user = str(
-            input("Você realmente quer comerçar o jogo?('Sim' para começar/ 'Não' para sair) "))
-        conf_user = conf_user.capitalize()
-        if conf_user == "Sim" or conf_user == "S":
-            game_inicio()
+#Função com laço para começar ou não o jogo
+def init():
+    while True:
+        try:
+            conf_user = str(
+                input("Você realmente quer comerçar o jogo?('Sim' para começar/ 'Não' para sair) "))
+            conf_user = conf_user.capitalize()
+            if conf_user == "Sim" or conf_user == "S":
+                game_inicio()
+                break
+            elif conf_user == "Não" or conf_user == "Nao" or conf_user == "N":
+                print("GOODBYE")
+                break
+            else:
+                print("Não entendi, digite novamente")
+        except:
+            print("Undefined")
             break
-        elif conf_user == "Não" or conf_user == "Nao" or conf_user == "N":
-            print("GOODBYE")
-            break
-        else:
-            print("Não entendi, digite novamente")
-    except:
-        print("Undefined")
-        break
+init()
